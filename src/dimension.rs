@@ -1,7 +1,9 @@
+/// A trait for square upper triangle matrices
 pub trait SquareDimension {
     fn to_usize(&self) -> usize;
 }
 
+/// A dynamic dimension.  For matrices that will need to be resized at runtime
 #[derive(Clone, Copy, PartialEq, PartialOrd)]
 pub struct DynSquare(pub(crate) usize);
 
