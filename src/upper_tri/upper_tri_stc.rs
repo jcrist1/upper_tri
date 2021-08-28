@@ -15,6 +15,8 @@ where
     }
 }
 
+/// For the static implementation we are guaranteed that the sizes are the same so we don't need a
+/// Zero bound on T
 impl<'a, 'b, T, const N: usize> Add<&'b UpperTriRawData<T, StcSquare<N>>>
     for &'a UpperTriRawData<T, StcSquare<N>>
 where
