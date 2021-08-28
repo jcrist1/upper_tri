@@ -539,5 +539,43 @@ where
     }
 }
 
+impl<'a, T, D: SquareDimension> Add<&'a UpperTriRawData<T, D>> for UpperTriRawData<T, D>
+where
+    &'a UpperTriRawData<T, D>:
+        for<'b> Add<&'b UpperTriRawData<T, D>, Output = UpperTriRawData<T, D>>,
+    T: Copy + Zero + for<'b> AddAssign<&'b T>,
+{
+    type Output = UpperTriRawData<T, D>;
+
+    fn add(self, rhs: &'a UpperTriRawData<T, D>) -> Self::Output {
+        rhs + &self
+    }
+}
+
+impl<'a, T, D: SquareDimension> Add<UpperTriRawData<T, D>> for &'a UpperTriRawData<T, D>
+where
+    &'a UpperTriRawData<T, D>:
+        for<'b> Add<&'b UpperTriRawData<T, D>, Output = UpperTriRawData<T, D>>,
+    T: Copy + Zero + for<'b> AddAssign<&'b T>,
+{
+    type Output = UpperTriRawData<T, D>;
+
+    fn add(self, rhs: UpperTriRawData<T, D>) -> Self::Output {
+        self + &rhs
+    }
+}
+
+impl<T, D: SquareDimension> Add<UpperTriRawData<T, D>> for UpperTriRawData<T, D>
+where
+    UpperTriRawData<T, D>: for<'b> Add<&'b UpperTriRawData<T, D>, Output = UpperTriRawData<T, D>>,
+    T: Copy + Zero + for<'b> AddAssign<&'b T>,
+{
+    type Output = UpperTriRawData<T, D>;
+
+    fn add(self, rhs: UpperTriRawData<T, D>) -> Self::Output {
+        self + &rhs
+    }
+}
+
 #[cfg(test)]
 mod test;

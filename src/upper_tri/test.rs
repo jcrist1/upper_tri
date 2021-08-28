@@ -1,3 +1,4 @@
+use crate::upper_tri::upper_tri_dyn::*;
 use crate::upper_tri::*;
 use std::iter::repeat;
 

@@ -65,13 +65,13 @@ where
     }
 }
 
-impl<'a, T> Add<&'a UpperTriRawData<T, DynSquare>> for &'a UpperTriRawData<T, DynSquare>
+impl<'a, 'b, T> Add<&'b UpperTriRawData<T, DynSquare>> for &'a UpperTriRawData<T, DynSquare>
 where
-    T: Copy + Zero + for<'b> AddAssign<&'b T>,
+    T: Copy + Zero + for<'c> AddAssign<&'c T>,
 {
     type Output = UpperTriRawData<T, DynSquare>;
 
-    fn add(self, rhs: &'a UpperTriRawData<T, DynSquare>) -> Self::Output {
+    fn add(self, rhs: &'b UpperTriRawData<T, DynSquare>) -> Self::Output {
         if rhs.rank >= self.rank {
             let mut return_buf = rhs.buf.clone();
             return_buf
@@ -98,38 +98,5 @@ where
                 rank: self.rank,
             }
         }
-    }
-}
-
-impl<'a, T> Add<&'a UpperTriRawData<T, DynSquare>> for UpperTriRawData<T, DynSquare>
-where
-    T: Copy + Zero + for<'b> AddAssign<&'b T>,
-{
-    type Output = UpperTriRawData<T, DynSquare>;
-
-    fn add(self, rhs: &'a UpperTriRawData<T, DynSquare>) -> Self::Output {
-        &self + rhs
-    }
-}
-
-impl<'a, T> Add<UpperTriRawData<T, DynSquare>> for &'a UpperTriRawData<T, DynSquare>
-where
-    T: Copy + Zero + for<'b> AddAssign<&'b T>,
-{
-    type Output = UpperTriRawData<T, DynSquare>;
-
-    fn add(self, rhs: UpperTriRawData<T, DynSquare>) -> Self::Output {
-        self + &rhs
-    }
-}
-
-impl<'a, T> Add<UpperTriRawData<T, DynSquare>> for UpperTriRawData<T, DynSquare>
-where
-    T: Copy + Zero + for<'b> AddAssign<&'b T>,
-{
-    type Output = UpperTriRawData<T, DynSquare>;
-
-    fn add(self, rhs: UpperTriRawData<T, DynSquare>) -> Self::Output {
-        &self + &rhs
     }
 }
