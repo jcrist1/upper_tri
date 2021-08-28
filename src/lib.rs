@@ -1,3 +1,4 @@
+pub mod dimension;
 pub mod upper_tri_data;
 #[cfg(test)]
 mod tests {
