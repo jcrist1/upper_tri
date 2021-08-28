@@ -1,5 +1,5 @@
 /// A trait for square upper triangle matrices
-pub trait SquareDimension {
+pub trait SquareDimension: Clone + Copy {
     fn to_usize(&self) -> usize;
 }
 
@@ -27,3 +27,9 @@ impl DynSquare {
 
 #[derive(Clone, Copy)]
 pub struct StcSquare<const N: usize>;
+
+impl<const N: usize> SquareDimension for StcSquare<N> {
+    fn to_usize(&self) -> usize {
+        N
+    }
+}
