@@ -24,3 +24,6 @@ impl DynSquare {
         }
     }
 }
+
+#[derive(Clone, Copy)]
+pub struct StcSquare<const N: usize>;
