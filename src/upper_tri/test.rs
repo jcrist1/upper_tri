@@ -1,4 +1,6 @@
+use crate::dimension::*;
 use crate::upper_tri::upper_tri_dyn::*;
+use crate::upper_tri::upper_tri_stc::*;
 use crate::upper_tri::*;
 use std::iter::repeat;
 
@@ -113,4 +115,21 @@ fn test_addition() {
     let third_col = upper_tri_3.get_raw_col(2).map(|x| *x).collect::<Vec<_>>();
     assert_eq!(second_col, vec![0]);
     assert_eq!(third_col, vec![2, 2]);
+}
+
+#[test]
+fn test_static() {
+    const DIM: usize = 10;
+    const ONE: i64 = 1;
+    const TWO: i64 = 2;
+    let stc_upper_tri_1: UpperTriRawData<i64, StcSquare<DIM>> =
+        UpperTriRawData::<i64, StcSquare<DIM>>::new_with(ONE);
+
+    let stc_upper_tri_2: UpperTriRawData<i64, StcSquare<DIM>> =
+        UpperTriRawData::<i64, StcSquare<DIM>>::new_with(TWO);
+
+    let stc_upper_tri_3 = stc_upper_tri_1 + stc_upper_tri_2;
+
+    let corner_sum: i64 = stc_upper_tri_3.get_corner(4).sum();
+    assert_eq!(corner_sum, (ONE + TWO) * (DIM as i64));
 }

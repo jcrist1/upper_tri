@@ -15,6 +15,19 @@ where
     }
 }
 
+impl<T, const N: usize> UpperTriRawData<T, StcSquare<N>>
+where
+    T: Copy,
+{
+    pub fn new_with(t: T) -> Self {
+        let buf = repeat(t).take(N * (N + 1) / 2).collect();
+        Self {
+            buf,
+            rank: StcSquare,
+        }
+    }
+}
+
 /// For the static implementation we are guaranteed that the sizes are the same so we don't need a
 /// Zero bound on T
 impl<'a, 'b, T, const N: usize> Add<&'b UpperTriRawData<T, StcSquare<N>>>
