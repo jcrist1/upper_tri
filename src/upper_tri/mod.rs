@@ -305,20 +305,20 @@ where
         }
     }
 
-    pub(crate) fn get_diag_el(&self, index: usize) -> Option<&T> {
+    pub fn get_diag_el(&self, index: usize) -> Option<&T> {
         self.get(index, index)
     }
 
-    pub(crate) fn get_diag_el_mut(&mut self, index: usize) -> Option<&mut T> {
+    pub fn get_diag_el_mut(&mut self, index: usize) -> Option<&mut T> {
         self.get_mut(index, index)
     }
 
-    pub(crate) fn get(&self, row: usize, col: usize) -> Option<&T> {
+    pub fn get(&self, row: usize, col: usize) -> Option<&T> {
         let offset = self.get_offset(row, col)?;
         self.buf.get(offset)
     }
 
-    pub(crate) fn get_mut(&mut self, row: usize, col: usize) -> Option<&mut T> {
+    pub fn get_mut(&mut self, row: usize, col: usize) -> Option<&mut T> {
         let offset = self.get_offset(row, col)?;
         self.buf.get_mut(offset)
     }
@@ -460,15 +460,15 @@ where
         (index_pair, accum)
     }
 
-    pub(crate) fn iter(&self) -> Iter<'_, T> {
+    pub fn iter(&self) -> Iter<'_, T> {
         self.buf.iter()
     }
 
-    pub(crate) fn iter_mut(&mut self) -> IterMut<'_, T> {
+    pub fn iter_mut(&mut self) -> IterMut<'_, T> {
         self.buf.iter_mut()
     }
 
-    pub(crate) fn into_iter(self) -> IntoIter<T> {
+    pub fn into_iter(self) -> IntoIter<T> {
         self.buf.into_iter()
     }
 }
